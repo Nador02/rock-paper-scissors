@@ -1,0 +1,1 @@
+This is my first Javascript project, creating a Rock Paper Scissors game entirely in the console!
