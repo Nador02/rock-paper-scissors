@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors Game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <div class="container">
+        <div class="top"></div> 
+        <div class="middle">
+            <div data-key="82" class="key">
+                <kbd>R</kbd>
+                <span id="choice">rock</span>
+            </div>
+            <div data-key="80" class="key">
+                <kbd>P</kbd>
+                <span id="choice">paper</span>
+            </div>
+            <div data-key="83" class="key">
+                 <kbd>S</kbd>
+                 <span id="choice">scissor</span>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+
+
+    <script>
+        let computerChoice = "";
+        let playerScore = 0;
+        let computerScore = 0;
+        function computerPlay(){
+            let rand = Math.random();
+            if(rand >= 0.66)
+                computerChoice = "rock";
+            else if(rand <= 0.33)
+                computerChoice = "scissors";
+            else
+                computerChoice = "paper";
+        }
+        function playRound(e){
+            computerPlay();
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            let playerChoice = key.querySelector('#choice').innerHTML;
+            console.log(playerChoice);
+            {
+                playerChoice="scissors";
+                console.log("YAY");
+            }
+            if(playerChoice == "rock")
+                if(computerChoice == "scissors"){
+                    playerScore++;
+                    alert("Rock crushes scissors, you win this time. The score is: " + playerScore + "-" + computerScore);
+                }
+                else if(computerChoice == "paper"){
+                    computerScore++;
+                    alert("Paper covers rock, haha I win this time! The score is: " + playerScore + "-" + computerScore);
+                }
+                else{
+                    alert("We both chose rock... so it's a tie! The score is: " + playerScore + "-" + computerScore);
+                }
+            else if(playerChoice == "paper")
+                if(computerChoice == "scissors"){
+                    computerScore++;
+                    alert("Scissors cut paper, haha I win this time! The score is: " + playerScore + "-" + computerScore);
+                }
+                else if (computerChoice == "rock"){
+                    playerScore++;
+                    alert("Paper covers rock, you win this time. The score is: " + playerScore + "-" + computerScore);
+                }
+                else{
+                    alert("We both chose paper... so it's a tie! The score is: " + playerScore + "-" + computerScore);
+                }
+            else
+                if(computerChoice == "paper"){
+                    playerScore++;
+                    alert("Scissors cut paper, you win this time. The score is: " + playerScore + "-" + computerScore);
+                }
+                else if(computerChoice == "rock"){
+                    computerScore++;
+                    alert("Rock crushers scissors, haha I win this time! The score is: " + playerScore + "-" + computerScore);
+                }
+                else{
+                    alert("We both chose scissors... so it's a tie! The score is: " + playerScore + "-" + computerScore);
+                }
+        }
+        /*function game(){
+            for(let x = 0; x<5;x++)
+            {
+                let temp = prompt("What is your choice?");
+                computerPlay();
+                let playerChoice = temp.toLowerCase();
+                playRound(playerChoice,computerChoice);
+            }
+        }*/
+        const keys = Array.from(document.querySelectorAll('.key'));
+        //keys.forEach(key=> key.addEventListener('transitioned', removeTransition));
+        window.addEventListener('keydown', playRound);
+    </script>
+    </body>
+</html>
